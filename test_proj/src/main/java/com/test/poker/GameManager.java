@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 public class GameManager {
     private static final Logger log = LogManager.getLogger(GameManager.class);
-    
+
     @Subscription
     public void onPlayerJoined(PlayerJoined e) {
         log.info("onPlayerJoined");
