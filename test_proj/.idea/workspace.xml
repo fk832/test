@@ -94,14 +94,15 @@
       <file leaf-file-name="GameManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/test/poker/GameManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="288">
+              <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
               <folding>
-                <element signature="e#452#453#0" expanded="true" />
-                <element signature="e#494#495#0" expanded="true" />
-                <element signature="e#604#605#0" expanded="true" />
-                <element signature="e#676#677#0" expanded="true" />
-                <element signature="e#720#721#0" expanded="true" />
+                <element signature="e#440#441#0" expanded="true" />
+                <element signature="e#482#483#0" expanded="true" />
+                <element signature="e#538#539#0" expanded="true" />
+                <element signature="e#580#581#0" expanded="true" />
+                <element signature="e#638#639#0" expanded="true" />
+                <element signature="e#682#683#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -835,9 +836,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GameManagerTest_InitTest - 2018.05.07 at 21h 25m 58s.xml">
-      <configuration name="GameManagerTest.InitTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="GameManagerTest_InitTest - 2018.05.07 at 21h 28m 01s.xml">
       <configuration name="GameManagerTest.InitTest" configurationId="JUnit" />
     </history-entry>
@@ -863,6 +861,9 @@
       <configuration name="GameManagerTest.InitTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="GameManagerTest_InitTest - 2018.05.07 at 21h 47m 20s.xml">
+      <configuration name="GameManagerTest.InitTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GameManagerTest_InitTest - 2018.05.07 at 21h 50m 37s.xml">
       <configuration name="GameManagerTest.InitTest" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -891,7 +892,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39934713" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39934713" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -947,8 +948,8 @@
           <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="false" />
-            <element signature="e#452#453#0" expanded="true" />
-            <element signature="e#494#495#0" expanded="true" />
+            <element signature="e#440#441#0" expanded="true" />
+            <element signature="e#482#483#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1012,8 +1013,8 @@
           <caret line="3" column="37" lean-forward="false" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="false" />
-            <element signature="e#452#453#0" expanded="true" />
-            <element signature="e#494#495#0" expanded="true" />
+            <element signature="e#440#441#0" expanded="true" />
+            <element signature="e#482#483#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1223,14 +1224,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/test/poker/GameManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="288">
+          <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
           <folding>
-            <element signature="e#452#453#0" expanded="true" />
-            <element signature="e#494#495#0" expanded="true" />
-            <element signature="e#604#605#0" expanded="true" />
-            <element signature="e#676#677#0" expanded="true" />
-            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#440#441#0" expanded="true" />
+            <element signature="e#482#483#0" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
+            <element signature="e#580#581#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
+            <element signature="e#682#683#0" expanded="true" />
           </folding>
         </state>
       </provider>

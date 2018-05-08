@@ -11,17 +11,17 @@ public class GameManager {
     private static final Logger log = LogManager.getLogger(GameManager.class);
 
     @Subscription
-    public void onPlayerJoined(PlayerJoined e) {
+    public void on(PlayerJoined e) {
         log.info("onPlayerJoined");
     }
 
     @Subscription
-    public void onPlayerRaised(PlayerRaised e) {
+    public void on(PlayerRaised e) {
         log.info("onPlayerRaised");
     }
 
     @Subscription
-    public void onSequencedEvent(SequencedEvent e) {
+    public void on(SequencedEvent e) {
         log.info("onSequencedEvent");
     }
 }
