@@ -1,4 +1,4 @@
-package com.test.poker.event;
+package com.test.msg;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,20 +1,23 @@
 package com.test.poker;
 
-import com.test.poker.event.PlayerJoined;
-import com.test.poker.event.PlayerRaised;
+import com.test.msg.MsgRouter;
+import com.test.poker.event.player.PlayerJoinsTheGame;
+import com.test.poker.event.player.PlayerJoinsTheRoom;
 import org.junit.Test;
 
 public class GameManagerTest {
     @Test
     public void InitTest() {
-        MsgBus bus = new MsgBus();
+        MsgRouter bus = new MsgRouter();
         GameManager gameManager = new GameManager();
         bus.subscribe(gameManager);
 
-        PlayerJoined playerJoined = new PlayerJoined();
-        bus.route(playerJoined);
+        PlayerJoinsTheRoom playerJoinsTheRoom = new PlayerJoinsTheRoom();
+        bus.route(playerJoinsTheRoom);
 
-        PlayerRaised playerRaised = new PlayerRaised();
-        bus.route(playerRaised);
+        PlayerJoinsTheGame playerSitsTheTable = new PlayerJoinsTheGame();
+        bus.route(playerSitsTheTable);
+        
+
     }
 }

@@ -1,6 +1,14 @@
 package com.test.poker;
 
 public class Player {
+    public void joinTheRoom() {
+
+    }
+
+    public void joinTheTable() {
+
+    }
+
     public void check() {
 
     }
