@@ -5,15 +5,18 @@ import com.test.poker.action.Action;
 
 import java.util.LinkedList;
 
-public class RoundPlayerListReady extends Action {
+public class RoundPlayerList extends Action {
     private LinkedList<RoundPlayer> players = new LinkedList<>();
+    private Context ctx;
 
-    public void start(Context ctx) {
+    public RoundPlayerList(Context ctx) {
+        this.ctx = ctx;
+    }
+
+    public void waitForPlayers() {
         if (ctx.table.numOfPlayers >= 2) {
             done();
             return;
         }
-
-
     }
 }

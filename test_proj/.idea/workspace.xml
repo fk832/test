@@ -59,27 +59,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RoundManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RoundManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoundManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="112">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#240#241#0" expanded="true" />
-                <element signature="e#270#271#0" expanded="true" />
+                <element signature="e#177#178#0" expanded="true" />
+                <element signature="e#207#208#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoundPlayerList.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RoundPlayerList.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoundPlayerList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+            <state relative-caret-position="112">
+              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#313#314#0" expanded="true" />
+                <element signature="e#343#344#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -549,7 +550,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/test/poker/MsgBus.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/poker/MsgRouter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/poker/Sequencer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/poker/event/PlayerJoined.java" />
@@ -595,11 +595,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/TexasHoldemRoundManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/Deck.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/Context.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoundManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoundPlayer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/Table.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/poker/action/Action.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoundPlayerListReady.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoundPlayerList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoundManager.java" />
       </list>
     </option>
   </component>
@@ -1337,14 +1338,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/poker/event/round/RoundStarted.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="46" lean-forward="false" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoomManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
@@ -1379,18 +1372,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoundManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#240#241#0" expanded="true" />
-            <element signature="e#270#271#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoundPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -1420,12 +1401,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/poker/event/round/RoundStarted.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" column="46" lean-forward="false" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoundPlayerList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+        <state relative-caret-position="112">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#313#314#0" expanded="true" />
+            <element signature="e#343#344#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/poker/texasholdem/RoundManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#177#178#0" expanded="true" />
+            <element signature="e#207#208#0" expanded="true" />
           </folding>
         </state>
       </provider>
