@@ -9,15 +9,14 @@ public class GameManagerTest {
     @Test
     public void InitTest() {
         MsgRouter bus = new MsgRouter();
-        GameManager gameManager = new GameManager();
-        bus.subscribe(gameManager);
+        GameManager gameManager = new GameManager(6);
+        gameManager.start();
 
         PlayerJoinsTheRoom playerJoinsTheRoom = new PlayerJoinsTheRoom();
         bus.route(playerJoinsTheRoom);
-
         PlayerJoinsTheGame playerSitsTheTable = new PlayerJoinsTheGame();
         bus.route(playerSitsTheTable);
         
-
+        gameManager.stop();
     }
 }
