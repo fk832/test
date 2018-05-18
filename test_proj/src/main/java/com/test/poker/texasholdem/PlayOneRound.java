@@ -1,6 +1,9 @@
 package com.test.poker.texasholdem;
 
+import com.test.msg.Subscription;
 import com.test.poker.action.Action;
+import com.test.poker.event.player.PlayerJoinsTheTable;
+import com.test.poker.event.player.PlayerLeavesTheTable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,19 +44,39 @@ public class PlayOneRound extends Action {
         waitForPlayers.run();
     }
 
-    private class WaitForPlayers extends RoundStep {
+    public class WaitForPlayers extends RoundStep {
         public WaitForPlayers(Context ctx) { super(ctx); }
 
         private LinkedList<RoundPlayer> players = new LinkedList<>();
 
+        private boolean check() {
+            if (ctx.table.numOfPlayers >= 2) {
+                log.info("WaitForPlayers done");
+                ctx.msgRouter.unsubscribe(this);
+                done();
+                return true;
+            }
+            return false;
+        }
+
         public void run() {
             log.info("WaitForPlayers");
-            if (ctx.table.numOfPlayers >= 2) {
-                done();
-                return;
-            }
 
-            //TODO subscribe for players table events
+            if(check()) return;
+
+            ctx.msgRouter.subscribe(this);
+        }
+
+        @Subscription
+        public void on(PlayerJoinsTheTable e){
+            log.info("WaitForPlayers player joins the table");
+            check();
+        }
+
+        @Subscription
+        public void on(PlayerLeavesTheTable e){
+            log.info("WaitForPlayers player leaves the table");
+            check();
         }
     }
 

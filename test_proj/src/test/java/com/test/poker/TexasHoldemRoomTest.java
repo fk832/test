@@ -15,7 +15,7 @@ public class TexasHoldemRoomTest {
         env.add(john);
         env.add(larry);
 
-        Room room = new Room("TexasHoldem", 6);
+        Room room = new Room("TexasHoldem", 6, router);
         room.open();
 
         env.joinsTheRoom(john);
