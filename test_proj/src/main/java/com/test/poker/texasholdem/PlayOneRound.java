@@ -9,50 +9,33 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.LinkedList;
 
-abstract class RoundStep extends Action {
-    protected Context ctx;
-
-    public RoundStep(Context ctx) {
-        this.ctx = ctx;
-    }
-}
-
 public class PlayOneRound extends Action {
-
     private static final Logger log = LogManager.getLogger(PlayOneRound.class);
 
     private Context ctx;
 
-    WaitForPlayers waitForPlayers;
-    ForceBlinds forceBlinds;
-    PreFlopBetting preFlopBetting;
-    FinishAndClean finishAndClean;
+    WaitForPlayers waitForPlayers = new WaitForPlayers();
+    PreFlopBetting preFlopBetting = new PreFlopBetting();;
+    DividePot dividePot = new DividePot();;
 
     public PlayOneRound(Context ctx) {
         this.ctx = ctx;
-        waitForPlayers = new WaitForPlayers(ctx);
-        forceBlinds = new ForceBlinds(ctx);
-        preFlopBetting = new PreFlopBetting(ctx);
-        finishAndClean = new FinishAndClean(ctx);
     }
 
     @Override
     public void run() {
-        waitForPlayers.whenDone(forceBlinds);
-        forceBlinds.whenDone(preFlopBetting);
-        preFlopBetting.whenDone(finishAndClean);
+        waitForPlayers.whenDone(preFlopBetting);
+        preFlopBetting.whenDone(dividePot);
         waitForPlayers.run();
     }
 
-    public class WaitForPlayers extends RoundStep {
-        public WaitForPlayers(Context ctx) { super(ctx); }
-
+    public class WaitForPlayers extends Action {
         private LinkedList<RoundPlayer> players = new LinkedList<>();
 
         private boolean check() {
             if (ctx.table.numOfPlayers >= 2) {
                 log.info("WaitForPlayers done");
-                ctx.msgRouter.unsubscribe(this);
+                ctx.table.events.unsubscribe(this);
                 done();
                 return true;
             }
@@ -60,56 +43,42 @@ public class PlayOneRound extends Action {
         }
 
         public void run() {
-            log.info("WaitForPlayers");
+            log.info("WaitForPlayers waiting");
 
             if(check()) return;
 
-            ctx.msgRouter.subscribe(this);
+            ctx.table.events.subscribe(this);
         }
 
         @Subscription
         public void on(PlayerJoinsTheTable e){
-            log.info("WaitForPlayers player joins the table");
+            log.info("WaitForPlayers player [{}] joins the table", e.player.name);
             check();
         }
 
         @Subscription
         public void on(PlayerLeavesTheTable e){
-            log.info("WaitForPlayers player leaves the table");
+            log.info("WaitForPlayers player [{}] leaves the table", e.player.name);
             check();
         }
     }
 
-    private class ForceBlinds extends RoundStep {
-        public ForceBlinds(Context ctx) { super(ctx); }
-
+    private class PreFlopBetting extends Action {
         @Override
         public void run() {
             log.info("ForceBlinds");
-
-        }
-    }
-
-    private class PreFlopBetting extends RoundStep {
-        public PreFlopBetting(Context ctx) { super(ctx); }
-
-        @Override
-        public void run() {
             log.info("PreFlopBetting");
-
+            done();
         }
     }
 
-    private class FinishAndClean extends RoundStep {
-        public FinishAndClean(Context ctx) { super(ctx); }
-
+    private class DividePot extends Action {
         @Override
         public void run() {
-            log.info("FinishAndClean");
+            log.info("DividePot");
             //TODO do clean up here
             PlayOneRound.this.done();
         }
     }
-
 }
 

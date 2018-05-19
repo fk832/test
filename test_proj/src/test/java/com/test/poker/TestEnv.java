@@ -15,14 +15,13 @@ public class TestEnv {
     }
 
     public void joinsTheRoom(Player p) {
+        playerJoinsTheRoom.player = p;
         router.route(playerJoinsTheRoom);
     }
 
-    public void joinsTheTable(Player p) {
+    public void joinsTheTable(Player p, int seatIdx) {
+        playerJoinsTheTable.player = p;
+        playerJoinsTheTable.seatIdx = seatIdx;
         router.route(playerJoinsTheTable);
-    }
-
-    public void add(Player p) {
-
     }
 }

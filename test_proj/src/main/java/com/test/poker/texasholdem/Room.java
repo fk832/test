@@ -24,6 +24,7 @@ public class Room {
         ctx = new Context();
         ctx.table = table;
         ctx.msgRouter = msgRouter;
+        ctx.msgRouter.subscribe(table);
         playOneRound = new PlayOneRound(ctx);
     }
 

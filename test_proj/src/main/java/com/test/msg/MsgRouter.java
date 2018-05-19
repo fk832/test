@@ -11,6 +11,7 @@ import java.util.Map;
 public class MsgRouter {
     
     private final Map<Class, List<SubscriberInfo>> map = new LinkedHashMap<>();
+    private List<Object> unsubscribeList = new ArrayList<Object>();
 
     public void subscribe(Object o) {
         for (Method method : o.getClass().getMethods()) {
@@ -25,11 +26,18 @@ public class MsgRouter {
     }
 
     public void unsubscribe(Object o) {
-        for (List<SubscriberInfo> subscriberInfos : map.values()) {
-            for (int i = subscriberInfos.size() - 1; i >= 0; i--)
-                if (subscriberInfos.get(i).object == o)
-                    subscriberInfos.remove(i);
+        unsubscribeList.add(o);
+    }
+
+    public void unsubscribeReal() {
+        for (Object o : unsubscribeList) {
+            for (List<SubscriberInfo> subscriberInfos : map.values()) {
+                for (int i = subscriberInfos.size() - 1; i >= 0; i--)
+                    if (subscriberInfos.get(i).object == o)
+                        subscriberInfos.remove(i);
+            }
         }
+        unsubscribeList.clear();
     }
 
     public int route(Object o) {
@@ -40,6 +48,8 @@ public class MsgRouter {
             subscriberInfo.invoke(o);
             count++;
         }
+
+        unsubscribeReal();
         return count;
     }
 
