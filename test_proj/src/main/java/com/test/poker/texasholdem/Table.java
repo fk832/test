@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 public class Table {
     private static final Logger log = LogManager.getLogger(Table.class);
 
-    private Player[] seats;
+    public Player[] seats;
 
     public int buttonIndex;
     public int numOfPlayers;

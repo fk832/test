@@ -7,5 +7,6 @@ public class Context {
     public Scheduler scheduler;
     public MsgRouter msgRouter;
     public Table table;
+    public RoundPlayers roundPlayers;
     public Deck deck;
 }

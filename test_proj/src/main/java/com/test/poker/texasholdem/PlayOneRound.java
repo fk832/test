@@ -1,9 +1,10 @@
 package com.test.poker.texasholdem;
 
+import com.test.event.TimerEvent;
 import com.test.msg.Subscription;
+import com.test.poker.Player;
 import com.test.poker.action.Action;
-import com.test.poker.event.player.PlayerJoinsTheTable;
-import com.test.poker.event.player.PlayerLeavesTheTable;
+import com.test.poker.event.player.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,8 +15,9 @@ public class PlayOneRound extends Action {
 
     private Context ctx;
 
-    WaitForPlayers waitForPlayers = new WaitForPlayers();
-    PreFlopBetting preFlopBetting = new PreFlopBetting();;
+    WaitForPlayersToJoin waitForPlayersToJoin = new WaitForPlayersToJoin();
+    
+    PreFlop preFlop = new PreFlop();;
     DividePot dividePot = new DividePot();;
 
     public PlayOneRound(Context ctx) {
@@ -24,18 +26,19 @@ public class PlayOneRound extends Action {
 
     @Override
     public void run() {
-        waitForPlayers.whenDone(preFlopBetting);
-        preFlopBetting.whenDone(dividePot);
-        waitForPlayers.run();
+        waitForPlayersToJoin.whenDone(preFlop);
+        preFlop.whenDone(dividePot);
+        waitForPlayersToJoin.run();
     }
 
-    public class WaitForPlayers extends Action {
-        private LinkedList<RoundPlayer> players = new LinkedList<>();
+    public class WaitForPlayersToJoin extends Action {
 
         private boolean check() {
             if (ctx.table.numOfPlayers >= 2) {
                 log.info("WaitForPlayers done");
                 ctx.table.events.unsubscribe(this);
+                ctx.roundPlayers.init(ctx.table);
+
                 done();
                 return true;
             }
@@ -63,12 +66,47 @@ public class PlayOneRound extends Action {
         }
     }
 
-    private class PreFlopBetting extends Action {
+    public class WaitForPlayerAction extends Action {
+
+        public Action wrapper;
+        public Player player;
+        @Override
+        public void run() {
+            log.info("WaitForPlayerAction player [{}] id[{}]", player.name, player.id);
+            player.events.subscribe(this);
+        }
+
+        @Subscription
+        public void on(PlayerCalls e) {
+
+        }
+
+        @Subscription
+        public void on(PlayerRaises e) {
+
+        }
+
+        @Subscription
+        public void on(PlayerFolds e) {
+
+        }
+
+        @Subscription
+        public void on(TimerEvent e) {
+
+        }
+    }
+
+    private class PreFlop extends Action {
+        private WaitForPlayerAction waitForPlayerAction = new WaitForPlayerAction();
+
         @Override
         public void run() {
             log.info("ForceBlinds");
-            log.info("PreFlopBetting");
-            done();
+            log.info("PreFlopDealt");
+            waitForPlayerAction.wrapper = this;
+            waitForPlayerAction.player = ctx.roundPlayers.players.get(0);
+            waitForPlayerAction.run();
         }
     }
 

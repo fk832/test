@@ -13,15 +13,20 @@ public class MsgRouter {
     private final Map<Class, List<SubscriberInfo>> map = new LinkedHashMap<>();
     private List<Object> unsubscribeList = new ArrayList<Object>();
 
+    public void subscribe(Object o, Method method) {
+        Class<?>[] parameterTypes = method.getParameterTypes();
+        if (method.getAnnotation(Subscription.class) == null || parameterTypes.length != 1) return;
+
+        Class subscribeTo = parameterTypes[0];
+        List<SubscriberInfo> subscriberInfos = map.get(subscribeTo);
+        if (subscriberInfos == null)
+            map.put(subscribeTo, subscriberInfos = new ArrayList<SubscriberInfo>());
+        subscriberInfos.add(new SubscriberInfo(method, o));        
+    }
+
     public void subscribe(Object o) {
         for (Method method : o.getClass().getMethods()) {
-            Class<?>[] parameterTypes = method.getParameterTypes();
-            if (method.getAnnotation(Subscription.class) == null || parameterTypes.length != 1) continue;
-            Class subscribeTo = parameterTypes[0];
-            List<SubscriberInfo> subscriberInfos = map.get(subscribeTo);
-            if (subscriberInfos == null)
-                map.put(subscribeTo, subscriberInfos = new ArrayList<SubscriberInfo>());
-            subscriberInfos.add(new SubscriberInfo(method, o));
+            subscribe(o, method);
         }
     }
 
@@ -41,6 +46,8 @@ public class MsgRouter {
     }
 
     public int route(Object o) {
+        unsubscribeReal();
+
         List<SubscriberInfo> subscriberInfos = map.get(o.getClass());
         if (subscriberInfos == null) return 0;
         int count = 0;
