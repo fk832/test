@@ -17,8 +17,8 @@ public class PlayOneRound extends Action {
 
     WaitForPlayersToJoin waitForPlayersToJoin = new WaitForPlayersToJoin();
     
-    PreFlop preFlop = new PreFlop();;
-    DividePot dividePot = new DividePot();;
+    PreFlop preFlop = new PreFlop();
+    DividePot dividePot = new DividePot();
 
     public PlayOneRound(Context ctx) {
         this.ctx = ctx;
@@ -66,10 +66,42 @@ public class PlayOneRound extends Action {
         }
     }
 
-    public class WaitForPlayerAction extends Action {
+    public class Betting extends Action {
 
-        public Action wrapper;
+
+        @Override
+        public void run() {
+            
+        }
+
+        public class NextPlayerAction extends Action {
+            private WaitForPlayerAction waitForPlayerAction = new WaitForPlayerAction();
+
+            public Player player;
+            public Player lastPlayerToAct;
+            public Context ctx;
+
+            @Override
+            public void run() {
+                player = ctx.roundPlayers.next();
+
+                if (player == lastPlayerToAct) {
+                    log.info("All players acted");
+                    Betting.this.done();
+                    return;
+                }
+
+                waitForPlayerAction.whenDone(NextPlayerAction.this);
+                waitForPlayerAction.player = player;
+                waitForPlayerAction.run();
+            }
+        }
+    }
+
+
+    public class WaitForPlayerAction extends Action {
         public Player player;
+
         @Override
         public void run() {
             log.info("WaitForPlayerAction player [{}] id[{}]", player.name, player.id);
@@ -98,15 +130,15 @@ public class PlayOneRound extends Action {
     }
 
     private class PreFlop extends Action {
-        private WaitForPlayerAction waitForPlayerAction = new WaitForPlayerAction();
+        private Betting betting = new Betting();
 
         @Override
         public void run() {
             log.info("ForceBlinds");
             log.info("PreFlopDealt");
-            waitForPlayerAction.wrapper = this;
-            waitForPlayerAction.player = ctx.roundPlayers.players.get(0);
-            waitForPlayerAction.run();
+            
+            betting.whenDone(() -> { PreFlop.this.done(); } );
+            betting.run();
         }
     }
 

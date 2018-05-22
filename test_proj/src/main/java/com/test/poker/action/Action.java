@@ -1,11 +1,15 @@
 package com.test.poker.action;
 
-public abstract class Action {
+public abstract class Action implements Runnable {
     private boolean isDone = false;
-    private Action action;
+    private Runnable runnable;
 
     public void whenDone(Action action) {
-        this.action = action;
+        this.runnable = null;
+    }
+
+    public void whenDone(Runnable runnable) {
+        this.runnable = runnable;
     }
 
     public abstract void run();
@@ -13,7 +17,7 @@ public abstract class Action {
     public void done() {
         if (isDone) return;
 
-        if (this.action != null) this.action.run();
+        if (this.runnable != null) this.runnable.run();
         
         isDone = true;
     }
