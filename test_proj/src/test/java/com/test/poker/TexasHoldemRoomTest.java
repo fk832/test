@@ -25,7 +25,6 @@ public class TexasHoldemRoomTest {
         env.calls(larry);
         env.calls(john);
         
-
         room.close();
     }
 }
