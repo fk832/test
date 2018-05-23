@@ -15,24 +15,24 @@ public class Room {
     public String name;
 
     private Context ctx;
-    private Table table;
-    private PlayOneRound playOneRound;
+    private Round round;
 
     public Room(String name, int numberOfPlayers, MsgRouter msgRouter) {
         this.name = name;
-        table = new Table(numberOfPlayers);
         ctx = new Context();
-        ctx.table = table;
+        ctx.table = new Table(numberOfPlayers);
         ctx.msgRouter = msgRouter;
+        ctx.playerActionMsgRouter = new PlayerActionMsgRouter();
         ctx.roundPlayers = new RoundPlayers();
-        ctx.msgRouter.subscribe(table);
-        playOneRound = new PlayOneRound(ctx);
+        ctx.msgRouter.subscribe(ctx.table);
+        ctx.msgRouter.subscribe(ctx.playerActionMsgRouter);
+        round = new Round(ctx);
     }
 
     public void open() {
         log.info("open");
-        playOneRound.whenDone(playOneRound);
-        playOneRound.run();
+        round.whenDone(round);
+        round.run();
     }
 
     public void close() {

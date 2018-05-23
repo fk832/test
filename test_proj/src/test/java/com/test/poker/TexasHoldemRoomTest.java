@@ -10,14 +10,8 @@ public class TexasHoldemRoomTest {
         MsgRouter router = new MsgRouter();
         TestEnv env = new TestEnv(router);
 
-        Player john = new Player();
-        john.id = 1;
-        john.name = "John";
-        john.cash = 1500;
-        Player larry = new Player();
-        larry.id = 2;
-        larry.name = "Larry";
-        larry.cash = 2000;
+        Player john = new Player(1, "John", 1500);
+        Player larry = new Player(2, "Larry", 2000);
 
         Room room = new Room("TexasHoldem", 6, router);
         room.open();
@@ -27,6 +21,9 @@ public class TexasHoldemRoomTest {
 
         env.joinsTheRoom(larry);
         env.joinsTheTable(larry, 1);
+
+        env.calls(larry);
+        env.calls(john);
 
         room.close();
     }

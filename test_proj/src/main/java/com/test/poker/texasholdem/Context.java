@@ -6,6 +6,7 @@ import com.test.msg.MsgRouter;
 public class Context {
     public Scheduler scheduler;
     public MsgRouter msgRouter;
+    public PlayerActionMsgRouter playerActionMsgRouter;
     public Table table;
     public RoundPlayers roundPlayers;
     public Deck deck;

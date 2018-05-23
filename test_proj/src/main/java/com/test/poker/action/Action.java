@@ -4,10 +4,6 @@ public abstract class Action implements Runnable {
     private boolean isDone = false;
     private Runnable runnable;
 
-    public void whenDone(Action action) {
-        this.runnable = null;
-    }
-
     public void whenDone(Runnable runnable) {
         this.runnable = runnable;
     }

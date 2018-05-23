@@ -8,30 +8,27 @@ import com.test.poker.event.player.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.LinkedList;
-
-public class PlayOneRound extends Action {
-    private static final Logger log = LogManager.getLogger(PlayOneRound.class);
+public class Round extends Action {
+    private static final Logger log = LogManager.getLogger(Round.class);
 
     private Context ctx;
 
-    WaitForPlayersToJoin waitForPlayersToJoin = new WaitForPlayersToJoin();
-    
+    CollectRoundPlayers collectRoundPlayers = new CollectRoundPlayers();
     PreFlop preFlop = new PreFlop();
     DividePot dividePot = new DividePot();
 
-    public PlayOneRound(Context ctx) {
+    public Round(Context ctx) {
         this.ctx = ctx;
     }
 
     @Override
     public void run() {
-        waitForPlayersToJoin.whenDone(preFlop);
+        collectRoundPlayers.whenDone(preFlop);
         preFlop.whenDone(dividePot);
-        waitForPlayersToJoin.run();
+        collectRoundPlayers.run();
     }
 
-    public class WaitForPlayersToJoin extends Action {
+    public class CollectRoundPlayers extends Action {
 
         private boolean check() {
             if (ctx.table.numOfPlayers >= 2) {
@@ -67,65 +64,59 @@ public class PlayOneRound extends Action {
     }
 
     public class Betting extends Action {
-
+        public NextPlayerAction nextPlayerAction = new NextPlayerAction();
 
         @Override
         public void run() {
-            
+            log.info("Betting started");
+            nextPlayerAction.run();
         }
 
         public class NextPlayerAction extends Action {
-            private WaitForPlayerAction waitForPlayerAction = new WaitForPlayerAction();
-
-            public Player player;
-            public Player lastPlayerToAct;
-            public Context ctx;
+            private PlayerAction playerAction = new PlayerAction();
 
             @Override
             public void run() {
-                player = ctx.roundPlayers.next();
-
-                if (player == lastPlayerToAct) {
-                    log.info("All players acted");
+                if (!ctx.roundPlayers.moveToNextIdxToAct()) {
+                    log.info("NextPlayerAction all players acted");
                     Betting.this.done();
                     return;
                 }
-
-                waitForPlayerAction.whenDone(NextPlayerAction.this);
-                waitForPlayerAction.player = player;
-                waitForPlayerAction.run();
+                log.info("NextPlayerAction idx[{}]", ctx.roundPlayers.curIdxToAct);
+                playerAction.whenDone(NextPlayerAction.this);
+                playerAction.run();
             }
         }
     }
 
-
-    public class WaitForPlayerAction extends Action {
-        public Player player;
-
+    public class PlayerAction extends Action {
+        public Player p;
         @Override
         public void run() {
-            log.info("WaitForPlayerAction player [{}] id[{}]", player.name, player.id);
-            player.events.subscribe(this);
+            p = ctx.roundPlayers.curPlayerToAct();
+            log.info("PlayerAction waiting for [{}] id[{}]", p.name, p.id);
+            ctx.playerActionMsgRouter.subscribe(p);
+            p.events.subscribe(this);
         }
 
         @Subscription
         public void on(PlayerCalls e) {
-
+            log.info("PlayerAction [{}] calls", p.name);
         }
 
         @Subscription
         public void on(PlayerRaises e) {
-
+            log.info("PlayerAction [{}] raises", p.name);
         }
 
         @Subscription
         public void on(PlayerFolds e) {
-
+            log.info("PlayerAction [{}] folds", p.name);
         }
 
         @Subscription
         public void on(TimerEvent e) {
-
+            log.info("PlayerAction [{}] timeouts", p.name);
         }
     }
 
@@ -147,7 +138,7 @@ public class PlayOneRound extends Action {
         public void run() {
             log.info("DividePot");
             //TODO do clean up here
-            PlayOneRound.this.done();
+            Round.this.done();
         }
     }
 }
