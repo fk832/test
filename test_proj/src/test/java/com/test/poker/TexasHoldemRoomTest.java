@@ -22,8 +22,8 @@ public class TexasHoldemRoomTest {
         env.joinsTheRoom(larry);
         env.joinsTheTable(larry, 1);
 
-        env.calls(larry);
         env.calls(john);
+        env.calls(larry);
         
         room.close();
     }

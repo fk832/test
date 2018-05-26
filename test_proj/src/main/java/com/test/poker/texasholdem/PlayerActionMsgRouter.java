@@ -23,6 +23,10 @@ public class PlayerActionMsgRouter {
         subs.put(p.id, p);
     }
 
+    public void unsubscribe(Player p) {
+        subs.remove(p.id);
+    }
+
     @Subscription
     public void on(PlayerCalls e) {
         route(e.player.id, e);
@@ -37,4 +41,5 @@ public class PlayerActionMsgRouter {
     public void on(PlayerRaises e) {
         route(e.player.id, e);
     }
+
 }

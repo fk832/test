@@ -24,12 +24,18 @@ public class RoundPlayers {
             if (table.seats[j] == null) continue;
             players.add(table.seats[j]);
         }
-        curIdxToAct = 2 % players.size();
+        //curIdxToAct = 2 % players.size();
+        curIdxToAct = -1;
         lastIdxToAct = 1;
 
     }
 
     public boolean moveToNextIdxToAct() {
+        if (curIdxToAct < 0) {
+            curIdxToAct = 2 % players.size();
+            return true;
+        }
+
         if (curIdxToAct == lastIdxToAct) return false;
 
         curIdxToAct = (curIdxToAct + 1) % players.size();
