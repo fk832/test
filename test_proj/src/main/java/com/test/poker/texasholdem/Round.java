@@ -99,32 +99,35 @@ public class Round extends Action {
             p.events.subscribe(this);
         }
 
-        private void clear() {
+        private void clearAndDone() {
             log.info("PlayerAction unsubscribing from [{}] id[{}]", p.name, p.id);
             ctx.playerActionMsgRouter.unsubscribe(p);
             p.events.unsubscribe(this);
+            done();
         }
 
         @Subscription
         public void on(PlayerCalls e) {
             log.info("PlayerAction [{}] calls", p.name);
-            clear();
-            done();
+            clearAndDone();
         }
 
         @Subscription
         public void on(PlayerRaises e) {
             log.info("PlayerAction [{}] raises", p.name);
+            clearAndDone();
         }
 
         @Subscription
         public void on(PlayerFolds e) {
             log.info("PlayerAction [{}] folds", p.name);
+            clearAndDone();
         }
 
         @Subscription
         public void on(TimerEvent e) {
             log.info("PlayerAction [{}] timeouts", p.name);
+            clearAndDone();
         }
     }
 
